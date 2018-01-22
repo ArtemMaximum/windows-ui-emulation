@@ -43,13 +43,14 @@ class AppsDashboardTemplate extends Component {
       profile,
       apps: {
         isFetchingApps, appsList
-      }
+      },
+      dispatch
     } = this.props
     
     return (
       <AppsDashboardWrapper>
         <Header profile={profile}/>
-        <AppsPanel isFetching={isFetchingApps} apps={appsList}/>
+        <AppsPanel isFetching={isFetchingApps} apps={appsList} dispatch={dispatch}/>
       </AppsDashboardWrapper>
     )
   }

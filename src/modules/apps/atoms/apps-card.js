@@ -12,7 +12,8 @@ const CARD_TYPES = {
 const PICKER_COLORS = [
   "#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3",
   "#03a9f4", "#00bcd4", "#009688", "#4caf50", "#8bc34a", "#cddc39",
-  "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", "#795548", "#607d8b"
+  "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", "#795548", "#607d8b",
+  "#2c89ef", "#6bb61d", "#db542d", "#bd1e4a", "#5e3aba",
 ]
 
 const AppsCardAtom = styled.a`
@@ -94,7 +95,7 @@ const ColorPickerSwitcher = styled.span`
   transition: all .3s;
 `
 
-export const AppCard = ({ app, currentColorPicker, handleClick, handleClose }) => (
+export const AppCard = ({ app, currentColorPicker, handleClick, handleClose, changeColor }) => (
   <AppsCardAtom app={app}>
     <CardName>{app.name}</CardName>
     <ColorPickerSwitcher className='switcher' onClick={(e) => handleClick(app.id)}> ... </ColorPickerSwitcher>
@@ -102,7 +103,10 @@ export const AppCard = ({ app, currentColorPicker, handleClick, handleClose }) =
       currentColorPicker === app.id ?
         <div>
           <div className='overlay' onClick={handleClose}/>
-          <CirclePicker color={app.color} colors={[].concat(app.color, ...PICKER_COLORS)}/>
+          <CirclePicker
+            color={app.color}
+            colors={PICKER_COLORS}
+            onChange={changeColor}/>
         </div> : null
     }
   </AppsCardAtom>

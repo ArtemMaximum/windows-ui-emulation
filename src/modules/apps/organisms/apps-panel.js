@@ -7,8 +7,7 @@ import { Apps } from '../molecules/index'
 import { App } from '../../../ui/types'
 import { keyify } from 'lib/string'
 import { AppCard } from '../atoms'
-
-
+import { changeCardColor } from '../actions'
 
 
 class AppsPanel extends Component {
@@ -21,10 +20,10 @@ class AppsPanel extends Component {
     
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.changeColor = this.changeColor.bind(this)
   }
   
   handleClick = (id) => {
-    console.log(id);
     this.setState({ currentColorPicker: id })
   };
   
@@ -32,6 +31,11 @@ class AppsPanel extends Component {
     this.setState({ currentColorPicker: null })
   };
   
+  changeColor = (color) => {
+    const { dispatch } = this.props
+  
+    dispatch(changeCardColor(this.state.currentColorPicker, color.hex))
+  }
   
   render() {
     const { isFetching, apps } = this.props
@@ -45,6 +49,7 @@ class AppsPanel extends Component {
             currentColorPicker={this.state.currentColorPicker}
             handleClick={this.handleClick}
             handleClose={this.handleClose}
+            changeColor={this.changeColor}
           />
         )}
       </Apps>

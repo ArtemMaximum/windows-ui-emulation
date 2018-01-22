@@ -1,7 +1,12 @@
+import { findIndex, propEq } from 'ramda'
 import {
   APPS_RECEIVE_START,
   APPS_RECEIVE_SUCCESS,
   APPS_RECEIVE_FAILURE,
+  
+  CARD_COLOR_CHANGE_START,
+  CARD_COLOR_CHANGE_SUCCESS,
+  CARD_COLOR_CHANGE_FAILURE,
 } from './action-types'
 
 
@@ -18,6 +23,11 @@ export default function apps(state = initialState, action) {
     case APPS_RECEIVE_SUCCESS:
     case APPS_RECEIVE_FAILURE:
       return fetchApps(state, action)
+    
+    case CARD_COLOR_CHANGE_START:
+    case CARD_COLOR_CHANGE_SUCCESS:
+    case CARD_COLOR_CHANGE_FAILURE:
+      return changeApp(state, action)
     
     default:
       return state
@@ -37,6 +47,33 @@ function fetchApps(state, action) {
         isFetching: false,
       })
     case APPS_RECEIVE_FAILURE:
+      return Object.assign({}, state, {
+        errorMessage: action.error,
+        isFetching: false,
+      })
+    default:
+      return state
+  }
+}
+
+function changeApp(state, action) {
+  switch (action.type) {
+    case CARD_COLOR_CHANGE_START:
+      return Object.assign({}, state, {
+        isFetching: true,
+      })
+    case CARD_COLOR_CHANGE_SUCCESS:
+      let index = findIndex(propEq('id', action.id))(state.list);
+      
+      return Object.assign({}, state, {
+        list: [
+          ...state.list.slice(0, index),
+          Object.assign({}, state.list[index], { color: action.color }),
+          ...state.list.slice(index + 1)
+        ]
+      })
+    
+    case CARD_COLOR_CHANGE_FAILURE:
       return Object.assign({}, state, {
         errorMessage: action.error,
         isFetching: false,

@@ -78,25 +78,20 @@ const PersonalInfo = styled.div`
   }
 `
 
-// TODO: add memoize for keyify(line)
 export const PersonalCard = ({ profile, isEditing, editingOpen, editingClose }) => (
-  <CardMolecule>
-    <PersonalInfo onClick={editingOpen}>
-      <h1>{profile.name + ' ' + profile.lastName}</h1>
-      <h2>{profile.nickName}</h2>
-    </PersonalInfo>
-    {
-      !isEmpty(profile) ?
-        <AvatarWrapper>
-          <Avatar src={profile.avatar} title={profile.name}/>
-        </AvatarWrapper>
-        :
-        null
-    }
-    <Modal closeable={true} title={'Alert!'} isOpen={isEditing} onClose={editingClose}>
-      TEST!
-    </Modal>
-  </CardMolecule>
+  !isEmpty(profile) ?
+    <CardMolecule>
+      <PersonalInfo onClick={editingOpen}>
+        <h1>{profile.name + ' ' + profile.lastName}</h1>
+        <h2>{profile.nickName}</h2>
+      </PersonalInfo>
+      <AvatarWrapper>
+        <Avatar src={profile.avatar} title={profile.name}/>
+      </AvatarWrapper>
+      <Modal closeable={true} title={'Alert!'} isOpen={isEditing} onClose={editingClose}>
+        TEST!
+      </Modal>
+    </CardMolecule> : null
 )
 
 PersonalCard.propTypes = {
