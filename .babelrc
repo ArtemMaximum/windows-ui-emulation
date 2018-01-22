@@ -1,0 +1,30 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }],
+    "react",
+    "es2016",
+    "es2017",
+    "stage-0"
+  ],
+  "plugins": [
+    "syntax-export-extensions",
+    ["module-resolver", {
+      "root": ["./src"],
+      "extensions": [".js", ".svg"]
+    }],
+    "inline-react-svg"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
+    },
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel",
+        "styled-name"
+      ]
+    }
+  }
+}
