@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "apps": [
+    {
+      "id": 0,
+      "name": "Store",
+      "color": "#2c89ef",
+      "type": "small",
+      "icon": ""
+    },
+    {
+      "id": 1,
+      "name": "Xbox LIVE Games",
+      "color": "#6bb61d",
+      "type": "small",
+      "icon": ""
+    },
+    {
+      "id": 2,
+      "name": "People",
+      "color": "#db542d",
+      "type": "big",
+      "icon": ""
+    },
+    {
+      "id": 3,
+      "name": "Weather",
+      "color": "#2c89ef",
+      "type": "big",
+      "icon": ""
+    },
+    {
+      "id": 4,
+      "name": "Maps",
+      "color": "#5e3aba",
+      "type": "small",
+      "icon": ""
+    },
+    {
+      "id": 5,
+      "name": "Internet Explorer",
+      "color": "#2c89ef",
+      "type": "small",
+      "icon": ""
+    },
+    {
+      "id": 6,
+      "name": "Photos",
+      "color": "#bd1e4a",
+      "type": "big",
+      "icon": ""
+    },
+    {
+      "id": 7,
+      "name": "Calendar",
+      "color": "#6bb61d",
+      "type": "big",
+      "icon": ""
+    },
+    {
+      "id": 8,
+      "name": "Mail",
+      "color": "#6bb61d",
+      "type": "big",
+      "icon": ""
+    },
+    {
+      "id": 9,
+      "name": "Music",
+      "color": "#5e3aba",
+      "type": "big",
+      "icon": ""
+    },
+    {
+      "id": 10,
+      "name": "Video",
+      "color": "#db542d",
+      "type": "small",
+      "icon": ""
+    },
+    {
+      "id": 11,
+      "name": "Sky Drive",
+      "color": "#2c89ef",
+      "type": "small",
+      "icon": ""
+    }
+  ]
+}

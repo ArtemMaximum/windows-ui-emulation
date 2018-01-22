@@ -1,9 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import AppsPanel from '../organisms/apps-panel'
 
 import Header from 'ui/organisms/header'
+import AppsPanel from '../organisms/apps-panel'
+
+import { receiveAppsList } from '../../apps/actions'
+import { receiveProfileData } from '../../profile/actions'
+import { connect } from 'react-redux'
 import { mediaMaxWidth } from 'lib/sizes'
 
 export const AppsDashboardWrapper = styled.div `
@@ -23,17 +26,45 @@ export const AppsDashboardWrapper = styled.div `
   }
 `
 
-export const AppsDashboardTemplate = ({ backgroundImage }) => (
-  <AppsDashboardWrapper>
-    <Header/>
-    <AppsPanel/>
-  </AppsDashboardWrapper>
-)
-
-AppsDashboardTemplate.propTypes = {
-  backgroundImage: PropTypes.string,
+class AppsDashboardTemplate extends Component {
+  constructor() {
+    super();
+  }
+  
+  componentDidMount() {
+    const { dispatch } = this.props
+    
+    dispatch(receiveAppsList())
+    dispatch(receiveProfileData())
+  }
+  
+  render() {
+    const {
+      profile,
+      apps: {
+        isFetchingApps, appsList
+      }
+    } = this.props
+    
+    return (
+      <AppsDashboardWrapper>
+        <Header profile={profile}/>
+        <AppsPanel isFetching={isFetchingApps} apps={appsList}/>
+      </AppsDashboardWrapper>
+    )
+  }
 }
 
-AppsDashboardTemplate.defaultProps = {
-  backgroundImage: 'http://cs636320.vk.me/v636320667/ef69/ejQ9Ihr-kuc.jpg',
+function select(state) {
+  return {
+    profile: state.profile.data,
+    apps: {
+      isFetchingApps: state.apps.isFetching,
+      appsList: state.apps.list,
+      AppsErrorMessage: state.apps.errorMessage,
+      AppsTotal: state.apps.total
+    }
+  }
 }
+
+export default connect(select)(AppsDashboardTemplate)

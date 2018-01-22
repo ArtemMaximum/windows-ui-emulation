@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // import PropTypes from 'prop-types'
 import { mediaMaxWidth, mediaMinWidth } from 'lib/sizes'
+import { isEmpty } from 'ramda'
 
 import { Profile } from '../types'
 import { Avatar } from '../atoms'
@@ -81,12 +82,17 @@ const PersonalInfo = styled.div`
 export const PersonalCard = ({ profile, isEditing, editingOpen, editingClose }) => (
   <CardMolecule>
     <PersonalInfo onClick={editingOpen}>
-      <h1>{profile.name}</h1>
+      <h1>{profile.name + ' ' + profile.lastName}</h1>
       <h2>{profile.nickName}</h2>
     </PersonalInfo>
-    <AvatarWrapper>
-      <Avatar src={profile.avatar} title={profile.name}/>
-    </AvatarWrapper>
+    {
+      !isEmpty(profile) ?
+        <AvatarWrapper>
+          <Avatar src={profile.avatar} title={profile.name}/>
+        </AvatarWrapper>
+        :
+        null
+    }
     <Modal closeable={true} title={'Alert!'} isOpen={isEditing} onClose={editingClose}>
       TEST!
     </Modal>

@@ -1,1 +1,1 @@
-export { AppCard as App } from './apps-card'
+export { AppCard } from './apps-card'

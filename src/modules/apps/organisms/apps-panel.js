@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import { keyify } from 'lib/string'
+import PropTypes from 'prop-types'
+import { isEmpty } from 'ramda'
+
+
 import { Apps } from '../molecules/index'
+import { App } from '../../../ui/types'
+import { keyify } from 'lib/string'
+import { AppCard } from '../atoms'
 
-// import PropTypes from 'prop-types'
-import scheme from 'scheme'
 
-// import { connect } from 'react-redux'
-// import { receiveExamplesList } from '../examples/actions'
-import { App } from '../atoms'
 
 
 class AppsPanel extends Component {
-  constructor(props) {
+  constructor() {
     super()
     
     this.state = {
@@ -22,12 +23,8 @@ class AppsPanel extends Component {
     this.handleClose = this.handleClose.bind(this)
   }
   
-  componentDidMount() {
-    // const { dispatch } = this.props
-    // dispatch(receiveExamplesList())
-  }
-  
   handleClick = (id) => {
+    console.log(id);
     this.setState({ currentColorPicker: id })
   };
   
@@ -37,12 +34,12 @@ class AppsPanel extends Component {
   
   
   render() {
-    // const { examples } = this.props
+    const { isFetching, apps } = this.props
     
     return (
       <Apps>
-        {scheme.apps.map((app) =>
-          <App
+        {!isEmpty(apps) && apps.map((app) =>
+          <AppCard
             key={keyify(app.name)}
             app={app}
             currentColorPicker={this.state.currentColorPicker}
@@ -55,6 +52,14 @@ class AppsPanel extends Component {
   }
 }
 
-AppsPanel.propTypes = {}
+AppsPanel.propTypes = {
+  apps: PropTypes.arrayOf(App),
+  isFetching: PropTypes.bool
+}
+
+AppsPanel.defaultProps = {
+  isFetching: true,
+  apps: []
+}
 
 export default AppsPanel

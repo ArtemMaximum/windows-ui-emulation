@@ -99,7 +99,7 @@ export const AppCard = ({ app, currentColorPicker, handleClick, handleClose }) =
     <CardName>{app.name}</CardName>
     <ColorPickerSwitcher className='switcher' onClick={(e) => handleClick(app.id)}> ... </ColorPickerSwitcher>
     {
-      currentColorPicker && currentColorPicker === app.id ?
+      currentColorPicker === app.id ?
         <div>
           <div className='overlay' onClick={handleClose}/>
           <CirclePicker color={app.color} colors={[].concat(app.color, ...PICKER_COLORS)}/>

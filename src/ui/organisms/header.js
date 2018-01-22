@@ -48,8 +48,8 @@ const ExpandedContent = styled.div`
 `
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     
     this.state = {
       isEditing: false
@@ -57,11 +57,6 @@ class Header extends Component {
     
     this.editingWindowOpen = this.editingWindowOpen.bind(this)
     this.editingWindowClose = this.editingWindowClose.bind(this)
-  }
-  
-  componentDidMount() {
-    // const { dispatch } = this.props
-    // dispatch(receiveExamplesList())
   }
   
   editingWindowOpen = () => {
