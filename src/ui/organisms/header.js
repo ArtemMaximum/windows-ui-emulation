@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { width, mediaMaxWidth } from 'lib/sizes'
-import { PersonalCard } from '../molecules'
+import { PersonalCard } from '../../modules/profile/molecules'
 import { Profile } from '../types'
 
 

@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+
 import { mediaMaxWidth, mediaMinWidth } from 'lib/sizes'
 import { isEmpty } from 'ramda'
 
-import { Profile } from '../types'
-import { Avatar } from '../atoms'
-import { Modal } from '../molecules'
+import { Profile } from '../../../ui/types'
+import { Avatar } from '../../../ui/atoms'
+import { Modal } from '../../../ui/molecules'
 
 
 const CardMolecule = styled.div`
@@ -95,5 +96,8 @@ export const PersonalCard = ({ profile, isEditing, editingOpen, editingClose }) 
 )
 
 PersonalCard.propTypes = {
-  profile: Profile.isRequired, // eslint-disable-line react/no-typos
+  profile: Profile.isRequired,
+  isEditing: PropTypes.bool,
+  editingOpen: PropTypes.func,
+  editingClose: PropTypes.func,
 }
