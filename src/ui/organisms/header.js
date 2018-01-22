@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { width, mediaMaxWidth } from 'lib/sizes'
 import { PersonalCard } from '../../modules/profile/molecules'
-import { Profile } from '../types'
+import { Profile } from '../../modules/profile/types'
 
 
 const HeaderOrganism = styled.section`

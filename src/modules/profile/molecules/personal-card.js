@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { mediaMaxWidth, mediaMinWidth } from 'lib/sizes'
 import { isEmpty } from 'ramda'
 
-import { Profile } from '../../../ui/types'
+import { Profile } from '../types'
 import { Avatar } from '../../../ui/atoms'
 import { Modal } from '../../../ui/molecules'
 

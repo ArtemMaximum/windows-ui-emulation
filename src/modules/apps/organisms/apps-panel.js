@@ -4,7 +4,7 @@ import { isEmpty } from 'ramda'
 
 
 import { Apps } from '../molecules/index'
-import { App } from '../../../ui/types'
+import { App } from '../types'
 import { keyify } from 'lib/string'
 import { AppCard } from '../atoms'
 import { changeCardColor } from '../actions'

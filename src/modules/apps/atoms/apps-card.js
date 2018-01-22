@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { App } from 'ui/types'
+import { App } from '../types'
 import { CirclePicker } from 'react-color'
 
 const CARD_TYPES = {
