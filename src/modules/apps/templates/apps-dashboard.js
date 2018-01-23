@@ -3,11 +3,14 @@ import styled from 'styled-components'
 
 import Header from 'ui/organisms/header'
 import AppsPanel from '../organisms/apps-panel'
+import { Modal } from '../../../ui/molecules'
 
 import { receiveAppsList } from '../../apps/actions'
 import { receiveProfileData } from '../../profile/actions'
 import { connect } from 'react-redux'
 import { mediaMaxWidth } from 'lib/sizes'
+
+import EditProfileContainer from '../../profile/edit-profile-container'
 
 export const AppsDashboardWrapper = styled.div `
   display: flex;
@@ -29,7 +32,22 @@ export const AppsDashboardWrapper = styled.div `
 class AppsDashboardTemplate extends Component {
   constructor() {
     super();
+    
+    this.state = {
+      isEditing: false
+    }
+    
+    this.editingModalOpen = this.editingModalOpen.bind(this)
+    this.editingModalClose = this.editingModalClose.bind(this)
   }
+  
+  editingModalOpen = () => {
+    this.setState({ isEditing: true })
+  };
+  
+  editingModalClose = () => {
+    this.setState({ isEditing: false })
+  };
   
   componentDidMount() {
     const { dispatch } = this.props
@@ -49,7 +67,14 @@ class AppsDashboardTemplate extends Component {
     
     return (
       <AppsDashboardWrapper>
-        <Header profile={profile}/>
+        <Header profile={profile} editingProfileOpen={this.editingModalOpen}/>
+        <Modal
+          closeable={true}
+          title={'Edit profile'}
+          isOpen={this.state.isEditing}
+          onClose={this.editingModalClose}>
+          <EditProfileContainer modalClose={this.editingModalClose}/>
+        </Modal>
         <AppsPanel isFetching={isFetchingApps} apps={appsList} dispatch={dispatch}/>
       </AppsDashboardWrapper>
     )

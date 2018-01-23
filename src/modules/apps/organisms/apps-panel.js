@@ -9,19 +9,34 @@ import { keyify } from 'lib/string'
 import { AppCard } from '../atoms'
 import { changeCardColor } from '../actions'
 
+import { Modal } from '../../../ui/molecules'
+import EditCardContainer from '../../apps/edit-app-container'
+
 
 class AppsPanel extends Component {
   constructor() {
     super()
     
     this.state = {
-      currentColorPicker: null
+      currentColorPicker: null,
+      isEditing: false,
+      editingAppId: null
     }
     
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.changeColor = this.changeColor.bind(this)
+    this.editingModalOpen = this.editingModalOpen.bind(this)
+    this.editingModalClose = this.editingModalClose.bind(this)
   }
+  
+  editingModalOpen = (id) => {
+    this.setState({ isEditing: true, editingAppId: id })
+  };
+  
+  editingModalClose = () => {
+    this.setState({ isEditing: false })
+  };
   
   handleClick = (id) => {
     this.setState({ currentColorPicker: id })
@@ -33,7 +48,7 @@ class AppsPanel extends Component {
   
   changeColor = (color) => {
     const { dispatch } = this.props
-  
+    
     dispatch(changeCardColor(this.state.currentColorPicker, color.hex))
   }
   
@@ -50,8 +65,16 @@ class AppsPanel extends Component {
             handleClick={this.handleClick}
             handleClose={this.handleClose}
             changeColor={this.changeColor}
+            openEditingModal={this.editingModalOpen}
           />
         )}
+        <Modal
+          closeable={true}
+          title={'Edit App'}
+          isOpen={this.state.isEditing}
+          onClose={this.editingModalClose}>
+          <EditCardContainer modalClose={this.editingModalClose} cardId={this.state.editingAppId}/>
+        </Modal>
       </Apps>
     )
   }

@@ -2,7 +2,11 @@ import api from '../../api'
 import {
   PROFILE_RECEIVE_START,
   PROFILE_RECEIVE_SUCCESS,
-  PROFILE_RECEIVE_FAILURE
+  PROFILE_RECEIVE_FAILURE,
+  
+  PROFILE_EDIT_START,
+  PROFILE_EDIT_SUCCESS,
+  PROFILE_EDIT_FAILURE,
 } from './action-types'
 
 
@@ -23,5 +27,16 @@ export const receiveProfileData = options => (dispatch) => {
   catch (error) {
     dispatch({ type: PROFILE_RECEIVE_FAILURE, error })
     throw error
+  }
+}
+
+export const editProfile = values => (dispatch) => {
+  dispatch({ type: PROFILE_EDIT_START })
+  
+  try {
+    dispatch({ type: PROFILE_EDIT_SUCCESS, data: values })
+  }
+  catch (error) {
+    dispatch({ type: PROFILE_EDIT_FAILURE, error })
   }
 }

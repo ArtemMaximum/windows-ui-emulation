@@ -7,8 +7,6 @@ import { isEmpty } from 'ramda'
 
 import { Profile } from '../types'
 import { Avatar } from '../../../ui/atoms'
-import { Modal } from '../../../ui/molecules'
-
 
 const CardMolecule = styled.div`
   display: flex;
@@ -79,7 +77,7 @@ const PersonalInfo = styled.div`
   }
 `
 
-export const PersonalCard = ({ profile, isEditing, editingOpen, editingClose }) => (
+export const PersonalCard = ({ profile, editingOpen }) => (
   !isEmpty(profile) ?
     <CardMolecule>
       <PersonalInfo onClick={editingOpen}>
@@ -89,9 +87,6 @@ export const PersonalCard = ({ profile, isEditing, editingOpen, editingClose }) 
       <AvatarWrapper>
         <Avatar src={profile.avatar} title={profile.name}/>
       </AvatarWrapper>
-      <Modal closeable={true} title={'Alert!'} isOpen={isEditing} onClose={editingClose}>
-        TEST!
-      </Modal>
     </CardMolecule> : null
 )
 
@@ -99,5 +94,5 @@ PersonalCard.propTypes = {
   profile: Profile.isRequired,
   isEditing: PropTypes.bool,
   editingOpen: PropTypes.func,
-  editingClose: PropTypes.func,
+  editingClose: PropTypes.func
 }

@@ -75,6 +75,10 @@ const CardName = styled.span`
   font-size: 11px;
   font-weight: 400;
   color: #ffffff;
+  
+  &:hover {
+    border-bottom: 1px dashed #ffffff
+  }
 `
 
 const ColorPickerSwitcher = styled.span`
@@ -95,9 +99,9 @@ const ColorPickerSwitcher = styled.span`
   transition: all .3s;
 `
 
-export const AppCard = ({ app, currentColorPicker, handleClick, handleClose, changeColor }) => (
+export const AppCard = ({ app, currentColorPicker, handleClick, handleClose, changeColor, openEditingModal }) => (
   <AppsCardAtom app={app}>
-    <CardName>{app.name}</CardName>
+    <CardName onClick={() => openEditingModal(app.id)}>{app.name}</CardName>
     <ColorPickerSwitcher className='switcher' onClick={(e) => handleClick(app.id)}> ... </ColorPickerSwitcher>
     {
       currentColorPicker === app.id ?

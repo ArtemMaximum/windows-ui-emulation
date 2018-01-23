@@ -7,6 +7,10 @@ import {
   CARD_COLOR_CHANGE_START,
   CARD_COLOR_CHANGE_SUCCESS,
   CARD_COLOR_CHANGE_FAILURE,
+  
+  CARD_DATA_CHANGE_START,
+  CARD_DATA_CHANGE_SUCCESS,
+  CARD_DATA_CHANGE_FAILURE,
 } from './action-types'
 
 
@@ -35,9 +39,20 @@ export const changeCardColor = (id, value) => (dispatch) => {
   dispatch({ type: CARD_COLOR_CHANGE_START })
   
   try {
-    dispatch({ type: CARD_COLOR_CHANGE_SUCCESS, id: id, color: value })
+    dispatch({ type: CARD_COLOR_CHANGE_SUCCESS, id: id, data: { color: value } })
   }
   catch (error) {
     dispatch({ type: CARD_COLOR_CHANGE_FAILURE, error })
+  }
+}
+
+export const editAppData = (id, values) => (dispatch) => {
+  dispatch({ type: CARD_DATA_CHANGE_START })
+  
+  try {
+    dispatch({ type: CARD_DATA_CHANGE_SUCCESS, id: id, data: values })
+  }
+  catch (error) {
+    dispatch({ type: CARD_DATA_CHANGE_FAILURE, error })
   }
 }

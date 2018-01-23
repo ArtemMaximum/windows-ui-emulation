@@ -36,7 +36,7 @@ const ModalBox = styled(ReactModal)`
   display: flex;
   flex-direction: column;
   font-family: ${font('primary')};
-  font-size: 1rem;
+  font-size: 0.8rem;
   background-color: ${palette('grayscale', 0, true)};
   border-radius: 0.125em;
   color: ${palette('grayscale', 0)};
@@ -79,6 +79,7 @@ const StyledHeading = styled(H2)`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 1.1rem;
 `
 
 const Content = styled.div`

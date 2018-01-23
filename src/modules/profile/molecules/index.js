@@ -1,1 +1,1 @@
-export * from './personal-card'
+export * from '../organisms/personal-card'

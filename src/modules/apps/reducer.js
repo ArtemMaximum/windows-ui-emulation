@@ -7,6 +7,10 @@ import {
   CARD_COLOR_CHANGE_START,
   CARD_COLOR_CHANGE_SUCCESS,
   CARD_COLOR_CHANGE_FAILURE,
+  
+  CARD_DATA_CHANGE_START,
+  CARD_DATA_CHANGE_SUCCESS,
+  CARD_DATA_CHANGE_FAILURE,
 } from './action-types'
 
 
@@ -27,6 +31,10 @@ export default function apps(state = initialState, action) {
     case CARD_COLOR_CHANGE_START:
     case CARD_COLOR_CHANGE_SUCCESS:
     case CARD_COLOR_CHANGE_FAILURE:
+    
+    case CARD_DATA_CHANGE_START:
+    case CARD_DATA_CHANGE_SUCCESS:
+    case CARD_DATA_CHANGE_FAILURE:
       return changeApp(state, action)
     
     default:
@@ -59,21 +67,24 @@ function fetchApps(state, action) {
 function changeApp(state, action) {
   switch (action.type) {
     case CARD_COLOR_CHANGE_START:
+    case CARD_DATA_CHANGE_START:
       return Object.assign({}, state, {
         isFetching: true,
       })
     case CARD_COLOR_CHANGE_SUCCESS:
+    case CARD_DATA_CHANGE_SUCCESS:
       let index = findIndex(propEq('id', action.id))(state.list);
       
       return Object.assign({}, state, {
         list: [
           ...state.list.slice(0, index),
-          Object.assign({}, state.list[index], { color: action.color }),
+          Object.assign({}, state.list[index], action.data),
           ...state.list.slice(index + 1)
         ]
       })
     
     case CARD_COLOR_CHANGE_FAILURE:
+    case CARD_DATA_CHANGE_FAILURE:
       return Object.assign({}, state, {
         errorMessage: action.error,
         isFetching: false,

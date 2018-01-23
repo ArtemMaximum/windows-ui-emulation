@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { width, mediaMaxWidth } from 'lib/sizes'
-import { PersonalCard } from '../../modules/profile/molecules'
+import { PersonalCard } from '../../modules/profile/organisms'
 import { Profile } from '../../modules/profile/types'
 
 
@@ -50,26 +50,11 @@ const ExpandedContent = styled.div`
 class Header extends Component {
   constructor() {
     super();
-    
-    this.state = {
-      isEditing: false
-    }
-    
-    this.editingWindowOpen = this.editingWindowOpen.bind(this)
-    this.editingWindowClose = this.editingWindowClose.bind(this)
   }
-  
-  editingWindowOpen = () => {
-    this.setState({ isEditing: true })
-  };
-  
-  editingWindowClose = () => {
-    this.setState({ isEditing: false })
-  };
   
   
   render() {
-    const { profile } = this.props;
+    const { profile, editingProfileOpen } = this.props;
     
     return (
       <HeaderOrganism>
@@ -78,9 +63,7 @@ class Header extends Component {
             <h1>Start</h1>
             <PersonalCard
               profile={profile}
-              isEditing={this.state.isEditing}
-              editingOpen={this.editingWindowOpen}
-              editingClose={this.editingWindowClose}
+              editingOpen={editingProfileOpen}
             />
           </ExpandedContent>
         </HeaderWrapper>
