@@ -40,6 +40,7 @@ const PersonalInfo = styled.div`
     margin: 20px 0;
     font-size: 26px !important;
     font-weight: 500;
+    text-align: right;
   }
 
   h2 {
@@ -59,6 +60,7 @@ const PersonalInfo = styled.div`
     h1 {
       font-size: 28px;
       margin-bottom: 10px;
+      text-align: center;
     }
 
     h2 {

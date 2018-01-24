@@ -7,7 +7,6 @@ import { Apps } from '../molecules/index'
 import { App } from '../types'
 import { keyify } from 'lib/string'
 import { AppCard } from '../atoms'
-import { changeCardColor } from '../actions'
 
 import { Modal } from '../../../ui/molecules'
 import EditCardContainer from '../../apps/edit-app-container'
@@ -47,9 +46,9 @@ class AppsPanel extends Component {
   };
   
   changeColor = (color) => {
-    const { dispatch } = this.props
+    const { changeCardColor } = this.props
     
-    dispatch(changeCardColor(this.state.currentColorPicker, color.hex))
+    changeCardColor(this.state.currentColorPicker, color.hex)
   }
   
   render() {

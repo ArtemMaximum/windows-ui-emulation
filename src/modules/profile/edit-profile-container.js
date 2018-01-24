@@ -21,15 +21,14 @@ const onSubmit = (values, dispatch) => {
 }
 
 EditProfileContainer = reduxForm({
-  form: 'edit-profile',  // a unique identifier for this form
+  form: 'edit-profile',
   onSubmit
 })(EditProfileContainer)
 
-// You have to connect() to any reducers that you wish to connect to yourself
-EditProfileContainer = connect(
-  state => ({
-    initialValues: state.profile.data // pull initial values from account reducer
-  }),
-)(EditProfileContainer)
+function select(state) {
+  return {
+    initialValues: state.profile.data
+  }
+}
 
-export default EditProfileContainer
+export default connect(select)(EditProfileContainer)

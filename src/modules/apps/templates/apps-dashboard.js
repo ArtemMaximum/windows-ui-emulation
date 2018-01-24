@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import Header from 'ui/organisms/header'
 import AppsPanel from '../organisms/apps-panel'
-import { Modal } from '../../../ui/molecules'
+import Header from 'ui/organisms/header'
 
-import { receiveAppsList } from '../../apps/actions'
 import { receiveProfileData } from '../../profile/actions'
-import { connect } from 'react-redux'
+import { receiveAppsList, changeCardColor } from '../../apps/actions'
+import { Modal } from '../../../ui/molecules'
+import { bindActionCreators } from 'redux'
 import { mediaMaxWidth } from 'lib/sizes'
+import { connect } from 'react-redux'
 
 import EditProfileContainer from '../../profile/edit-profile-container'
 
@@ -39,21 +40,28 @@ class AppsDashboardTemplate extends Component {
     
     this.editingModalOpen = this.editingModalOpen.bind(this)
     this.editingModalClose = this.editingModalClose.bind(this)
+    this.changeCardColorHandler = this.changeCardColorHandler.bind(this)
   }
   
   editingModalOpen = () => {
     this.setState({ isEditing: true })
-  };
+  }
   
   editingModalClose = () => {
     this.setState({ isEditing: false })
-  };
+  }
+  
+  changeCardColorHandler = (id, color) => {
+    const { changeCardColor } = this.props
+    
+    changeCardColor(id, color)
+  }
   
   componentDidMount() {
-    const { dispatch } = this.props
+    const { receiveAppsList, receiveProfileData } = this.props
     
-    dispatch(receiveAppsList())
-    dispatch(receiveProfileData())
+    receiveAppsList()
+    receiveProfileData()
   }
   
   render() {
@@ -61,8 +69,7 @@ class AppsDashboardTemplate extends Component {
       profile,
       apps: {
         isFetchingApps, appsList
-      },
-      dispatch
+      }
     } = this.props
     
     return (
@@ -75,7 +82,7 @@ class AppsDashboardTemplate extends Component {
           onClose={this.editingModalClose}>
           <EditProfileContainer modalClose={this.editingModalClose}/>
         </Modal>
-        <AppsPanel isFetching={isFetchingApps} apps={appsList} dispatch={dispatch}/>
+        <AppsPanel isFetching={isFetchingApps} apps={appsList} changeCardColor={this.changeCardColorHandler}/>
       </AppsDashboardWrapper>
     )
   }
@@ -93,4 +100,12 @@ function select(state) {
   }
 }
 
-export default connect(select)(AppsDashboardTemplate)
+function mapDispatchToProps(dispatch) {
+  return {
+    receiveAppsList: bindActionCreators(receiveAppsList, dispatch),
+    receiveProfileData: bindActionCreators(receiveProfileData, dispatch),
+    changeCardColor: bindActionCreators(changeCardColor, dispatch),
+  }
+}
+
+export default connect(select, mapDispatchToProps)(AppsDashboardTemplate)

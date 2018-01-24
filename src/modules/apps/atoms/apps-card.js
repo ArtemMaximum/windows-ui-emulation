@@ -75,9 +75,10 @@ const CardName = styled.span`
   font-size: 11px;
   font-weight: 400;
   color: #ffffff;
+  border-bottom: 1px dashed transparent;
   
   &:hover {
-    border-bottom: 1px dashed #ffffff
+    border-color: #ffffff;
   }
 `
 
